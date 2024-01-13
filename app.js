@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 mongoose
   .connect(process.env.DB)
   .then((result) => {
-    console.log("Database connected ..");
+    console.log("Database connected...");
   })
   .catch((err) => {
     console.log(err);
@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 app.use("/api", require("./routes/product.routes"));
 app.use("/api", require("./routes/review.routes"));
 app.use("/api", require("./routes/user.routes"));
+app.use("/api", require("./routes/auth.routes"));
 
 app.listen(process.env.PORT, () => {
   console.log(`Server is running on http://localhost:${process.env.PORT}`);

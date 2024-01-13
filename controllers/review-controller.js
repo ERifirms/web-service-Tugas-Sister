@@ -18,3 +18,14 @@ module.exports.store = async (req, res) => {
 
   res.status(201).json(product);
 };
+
+module.exports.delete = async (req, res) => {
+  const { product_id, review_id } = req.params;
+
+  await Product.findByIdAndUpdate(product_id, {
+    $pull: { reviews: review_id },
+  });
+  await Review.findByIdAndDelete(review_id);
+
+  res.status(200).json({ message: "Deleted Review Successfully" });
+};
